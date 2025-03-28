@@ -1,6 +1,6 @@
 'use client';
 import { useLanguage } from '@/context/LanguageContext';
-import './LanguageSwitcher.css';
+import './languageSwitcher.css';
 
 export default function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage();
