@@ -1,0 +1,284 @@
+/*!**********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./app/page.css ***!
+  \**********************************************************************************************************************************************************************************************************************************************************/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.todo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.todo-card {
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(12px);
+          backdrop-filter: blur(12px);
+  padding: 2rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  animation: popIn 0.4s ease-out;
+}
+
+.todo-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+}
+
+.todo-input-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.todo-input,
+.todo-time {
+  flex: 1 1;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 2px solid #cbd5e0;
+  border-radius: 0.5rem;
+  outline: none;
+}
+
+.todo-btn {
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.todo-btn:active,
+.delete-btn:active,
+.toggle-theme-btn:active {
+  transform: scale(0.95);
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #edf2f7;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  animation: fadeInUp 0.3s ease forwards;
+}
+
+.todo-item.done {
+  background: #c6f6d5;
+  text-decoration: line-through;
+  color: #4a5568;
+}
+
+.todo-text {
+  font-weight: 500;
+}
+
+.todo-time-range {
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  font-size: 1.25rem;
+  background: none;
+  border: none;
+  color: #e53e3e;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.light {
+  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+  color: #1a202c;
+}
+
+.dark {
+  background: linear-gradient(135deg, #1a202c, #2d3748);
+  color: #edf2f7;
+}
+
+.dark .todo-card {
+  background-color: rgba(26, 32, 44, 0.95);
+  color: #edf2f7;
+}
+
+.dark .todo-title {
+  color: #f7fafc;
+}
+
+.dark .todo-input,
+.dark .todo-time {
+  background-color: #2d3748;
+  border: 2px solid #4a5568;
+  color: #edf2f7;
+}
+
+.dark .todo-btn {
+  background: linear-gradient(135deg, #90cdf4, #667eea);
+  color: #ffffff;
+}
+
+.dark .todo-item {
+  background-color: #1a202c;
+  color: #e2e8f0;
+}
+
+.dark .todo-item.done {
+    background-color: #38a169 !important; /* zelena */
+    color: #f0fff4;
+  }
+  
+.dark .todo-text {
+  color: #e2e8f0;
+}
+
+.dark .todo-time-range {
+  color: #a0aec0;
+}
+
+.dark .delete-btn {
+  color: #feb2b2;
+}
+
+.dark .toggle-theme-btn {
+  color: #e2e8f0;
+  border-color: #4a5568;
+}
+
+.dark input::placeholder {
+  color: #a0aec0;
+}
+
+.toggle-theme-btn {
+  background: transparent;
+  border: 2px solid #a0aec0;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease;
+}
+
+/* Animacije */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.dark input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+  .dark input[type="time"] {
+    color-scheme: dark;
+  }
+
+  .dark .checkbox-wrapper input[type="checkbox"] {
+    accent-color: #ffffff; /* zelena štiklirana kutija */
+  }
+  /* 💡 Light Mode specifični stilovi */
+.light .todo-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #1a202c;
+}
+
+.light .todo-title {
+  color: #2d3748;
+}
+
+.light .todo-input,
+.light .todo-time {
+  background-color: white;
+  border-color: #cbd5e0;
+  color: #1a202c;
+}
+
+.light .todo-item {
+  background: #edf2f7;
+  color: #2d3748;
+}
+
+.light .todo-item.done {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.light .delete-btn {
+  color: #e53e3e;
+}
+
+.light .todo-time-range {
+  color: #4a5568;
+}
+
+.light .toggle-theme-btn {
+  color: #1a202c;
+  border-color: #cbd5e0;
+}
+
+body {
+  transition: background 0.3s ease;
+}
+
+.todo-card {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logout-link {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  color: #718096;
+  text-align: center;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.logout-link:hover {
+  color: #4a5568;
+  text-decoration: none;
+}
+

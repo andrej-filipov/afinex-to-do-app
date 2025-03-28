@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dodatni stilovi */
+body {
+  @apply bg-white text-black dark:bg-gray-900 dark:text-white transition-colors duration-300;
+}
+:root {
+  --switch-bg: #edf2f7;
+  --switch-text: #1a202c;
+  --switch-border: #cbd5e0;
+}
+
+.dark {
+  --switch-bg: #2d3748;
+  --switch-text: #edf2f7;
+  --switch-border: #4a5568;
+}
+
+
