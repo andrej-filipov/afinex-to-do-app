@@ -1,0 +1,25 @@
+/*!*************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./app/globals.css ***!
+  \*************************************************************************************************************************************************************************************************************************************************************/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dodatni stilovi */
+body {
+  @apply bg-white text-black dark:bg-gray-900 dark:text-white transition-colors duration-300;
+}
+:root {
+  --switch-bg: #edf2f7;
+  --switch-text: #1a202c;
+  --switch-border: #cbd5e0;
+}
+
+.dark {
+  --switch-bg: #2d3748;
+  --switch-text: #edf2f7;
+  --switch-border: #4a5568;
+}
+
+
+
