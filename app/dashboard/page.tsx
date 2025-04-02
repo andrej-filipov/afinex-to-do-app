@@ -8,13 +8,13 @@ import LanguageSwitcher from '../components/LanguageSwitcher';
 import translations from '@/utils/translations';
 import { useLanguage } from '@/context/LanguageContext';
 
-
 import {
   fetchTodos,
   addTodo as addTodoToDB,
   deleteTodo as deleteTodoFromDB,
   toggleComplete as toggleTodoComplete
 } from '@/utils/supabaseTodos';
+
 import '../page.css';
 
 type Todo = {
@@ -23,6 +23,7 @@ type Todo = {
   completed: boolean;
   start_time: string;
   end_time: string;
+  due_at: string;
 };
 
 export default function DashboardPage() {
@@ -37,6 +38,7 @@ export default function DashboardPage() {
   const [input, setInput] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
+  const [dueDate, setDueDate] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editingText, setEditingText] = useState('');
@@ -103,16 +105,22 @@ export default function DashboardPage() {
 
   const addTodo = async () => {
     if (!input.trim()) return;
+
+    const fullDateTime = dueDate && startTime
+      ? new Date(`${dueDate}T${startTime}`).toISOString()
+      : null;
+
     try {
-      await addTodoToDB(user.id, input.trim(), startTime, endTime);
+      await addTodoToDB(user.id, input.trim(), startTime, endTime, fullDateTime);
       toast.success(t.task_added);
       setInput('');
       setStartTime('');
       setEndTime('');
+      setDueDate('');
       await loadTodos();
-    } catch (err) {
-      console.error('Greška pri dodavanju taska:', err);
-      toast.error('Greška pri dodavanju zadatka ❌');
+    } catch (err: any) {
+      console.error('Greška pri dodavanju taska:', err?.message || err);
+      toast.error(`Greška: ${err?.message || 'Nešto nije u redu'}`);
     }
   };
 
@@ -166,28 +174,46 @@ export default function DashboardPage() {
           {userName ? getGreeting(userName, userGender) : t.todo_title}
         </h1>
 
-        <div className="todo-input-wrapper">
-          <input
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && addTodo()}
-            placeholder={t.enter_task}
-            className="todo-input"
-          />
-          <input
-            type="time"
-            value={startTime}
-            onChange={(e) => setStartTime(e.target.value)}
-            className="todo-time"
-          />
-          <input
-            type="time"
-            value={endTime}
-            onChange={(e) => setEndTime(e.target.value)}
-            className="todo-time"
-          />
-          <button onClick={addTodo} className="todo-btn">{t.add}</button>
-        </div>
+        {/* ✅ LEPA 2-REDA FORMA */}
+        <div className="todo-input-wrapper flex flex-wrap justify-center items-center gap-2 mt-6">
+  <input
+    value={input}
+    onChange={(e) => setInput(e.target.value)}
+    onKeyDown={(e) => e.key === 'Enter' && addTodo()}
+    placeholder={t.enter_task}
+    className="todo-input w-[180px] h-[42px]"
+  />
+
+  <input
+    type="date"
+    value={dueDate}
+    onChange={(e) => setDueDate(e.target.value)}
+    className="todo-input w-[150px] h-[42px]"
+  />
+
+  <input
+    type="time"
+    value={startTime}
+    onChange={(e) => setStartTime(e.target.value)}
+    className="todo-time w-[130px] h-[42px]"
+  />
+
+  <input
+    type="time"
+    value={endTime}
+    onChange={(e) => setEndTime(e.target.value)}
+    className="todo-time w-[130px] h-[42px]"
+  />
+
+  <button
+    onClick={addTodo}
+    className="todo-btn h-[42px] px-6 bg-gradient-to-r from-gray-900 to-orange-500 text-white rounded font-semibold text-sm hover:opacity-90 transition"
+  >
+    {t.add}
+  </button>
+</div>
+
+
 
         <ul className="todo-list">
           {todos.map(todo => (
@@ -216,6 +242,11 @@ export default function DashboardPage() {
                   <>
                     <span className="todo-text">{todo.text}</span><br />
                     <span className="todo-time-range">{todo.start_time} - {todo.end_time}</span>
+                    {todo.due_at && (
+                      <div className="text-xs text-gray-400 mt-1">
+                        📅 Rok: {new Date(todo.due_at).toLocaleDateString('sr-RS')}
+                      </div>
+                    )}
                   </>
                 )}
               </div>
